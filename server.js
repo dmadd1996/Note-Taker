@@ -1,10 +1,12 @@
 const express = require('express')
 const fs = require('fs')
 const path = require('path')
+const Profanity = require('profanity-js')
 const {uuid} = require('uuidv4')
 
 const app = express()
 const PORT = process.env.PORT || 3001
+
 
 app.use(express.json())
 app.use(express.urlencoded({
@@ -27,8 +29,17 @@ app.get('/api/notes', (req, res) => {
 //posts new notes from the save icon
 app.post('/api/notes', (req, res) => {
     var notes = JSON.parse(fs.readFileSync('./db/db.json', 'utf8'))
-    //combines body to var
-    var newNote = req.body;
+    
+    //combines body to var and censors bad words
+    let config = {
+        language: "en-us"
+    };
+
+    var rawNote = JSON.stringify(req.body);
+
+    let profanity = new Profanity(rawNote, config)
+
+    var newNote = JSON.parse(profanity.censor(rawNote))
 
     //gives note a unique id via module
     newNote.id = uuid()

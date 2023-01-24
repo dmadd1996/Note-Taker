@@ -87,7 +87,11 @@ const handleNoteDelete = (e) => {
 
   console.log('note var: ',note)
   console.log('noteID var: ',noteId)
-
+  if (activeNote.id === '7aae0fbe-f8d7-4e59-97ba-b31be612c8fe') {
+    window.alert('Please do not delete the about message!')
+    return
+  }
+  
   if (activeNote.id === noteId) {
     activeNote = {};
   }

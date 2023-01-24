@@ -12,6 +12,8 @@
     "express": "^4.16.4",
     "fs": "^0.0.1-security",
     "path": "^0.12.7",
+    "profanity-js": "^0.1.4",
+    "require.js": "^1.0.0",
     "uuidv4": "^6.2.13"
   }
 }
